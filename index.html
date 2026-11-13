@@ -1,0 +1,993 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+  <title>Akanksha Shetty - Profile Portal</title> 
+   
+  <!-- Google Fonts Imports --> 
+  <link rel="preconnect" href="https://fonts.googleapis.com"> 
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+  <link 
+href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:w
+ght@400;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"> 
+ 
+  <style> 
+    /* ========================================== 
+       RESET & GLOBAL STYLES 
+       ========================================== */ 
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    } 
+ 
+    body { 
+      background-color: #f8fafc; 
+      color: #334155; 
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
+      line-height: 1.6; 
+    } 
+ 
+    .hidden { 
+      display: none !important; 
+    } 
+ 
+    /* ========================================== 
+       LANDING PAGE (HERO & SELECTION VIEW - WHITE THEME) 
+       ========================================== */ 
+    #landing-page { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      min-height: 100vh; 
+      padding: 50px 20px; 
+      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); 
+      color: #1e293b; 
+      text-align: center; 
+    } 
+ 
+    /* Profile Header Box */ 
+    .profile-hero { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      margin-bottom: 35px; 
+      max-width: 750px; 
+    } 
+ 
+    .profile-avatar-container { 
+      position: relative; 
+      width: 140px; 
+      height: 140px; 
+      margin-bottom: 20px; 
+    } 
+ 
+    .profile-avatar { 
+      width: 100%; 
+      height: 100%; 
+      border-radius: 50%; 
+      object-fit: cover; 
+      border: 4px solid #2563eb; 
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2); 
+    } 
+ 
+    .profile-hero h1 { 
+      font-family: 'Outfit', sans-serif; 
+      font-size: 2.8rem; 
+      font-weight: 800; 
+      letter-spacing: -0.5px; 
+      margin-bottom: 8px; 
+      color: #0f172a; 
+    } 
+ 
+    .badge-container { 
+      display: flex; 
+      gap: 10px; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+    } 
+ 
+    .badge { 
+      background: #e2e8f0; 
+      border: 1px solid #cbd5e1; 
+      padding: 5px 14px; 
+      border-radius: 20px; 
+      font-size: 0.82rem; 
+      color: #334155; 
+      font-weight: 500; 
+    } 
+ 
+    /* Card Selection Container */ 
+    .card-container { 
+      display: flex; 
+      gap: 30px; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      max-width: 900px; 
+      width: 100%; 
+      margin-bottom: 50px; 
+    } 
+ 
+    .selection-card { 
+      background: #ffffff; 
+      border: 1px solid #e2e8f0; 
+      color: #1e293b; 
+      border-radius: 16px; 
+      padding: 35px 30px; 
+      width: 380px; 
+      cursor: pointer; 
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      text-align: center; 
+      position: relative; 
+      overflow: hidden; 
+    } 
+ 
+    .selection-card::before { 
+      content: ''; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      width: 100%; 
+      height: 4px; 
+      background: linear-gradient(90deg, #2563eb, #60a5fa); 
+      opacity: 0; 
+      transition: opacity 0.3s; 
+    } 
+ 
+    .selection-card:hover { 
+      transform: translateY(-8px); 
+      border-color: #93c5fd; 
+      box-shadow: 0 20px 35px rgba(37, 99, 235, 0.12); 
+    } 
+ 
+    .selection-card:hover::before { 
+      opacity: 1; 
+    } 
+ 
+    .card-icon { 
+      font-size: 3rem; 
+      margin-bottom: 15px; 
+      background: #eff6ff; 
+      width: 70px; 
+      height: 70px; 
+      border-radius: 50%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+    } 
+ 
+    .selection-card h2 { 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 1.6rem; 
+      font-weight: 600; 
+      margin-bottom: 10px; 
+      color: #0f172a; 
+    } 
+ 
+    .selection-card p { 
+      color: #64748b; 
+      font-size: 0.95rem; 
+      margin-bottom: 25px; 
+      line-height: 1.5; 
+    } 
+ 
+    .btn-select { 
+      background: linear-gradient(135deg, #2563eb, #1d4ed8); 
+      color: white; 
+      border: none; 
+      padding: 12px 28px; 
+      border-radius: 8px; 
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 600; 
+      font-size: 0.95rem; 
+      cursor: pointer; 
+      transition: all 0.2s ease; 
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3); 
+    } 
+ 
+    .selection-card:hover .btn-select { 
+      background: linear-gradient(135deg, #3b82f6, #2563eb); 
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); 
+      transform: scale(1.03); 
+    } 
+ 
+    /* Purpose Info Section */ 
+    .purpose-section { 
+      max-width: 900px; 
+      width: 100%; 
+      background: #ffffff; 
+      border: 1px solid #e2e8f0; 
+      border-radius: 16px; 
+      padding: 35px 30px; 
+      text-align: left; 
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03); 
+    } 
+ 
+    .purpose-section h3 { 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 1.3rem; 
+      color: #2563eb; 
+      margin-bottom: 20px; 
+      text-align: center; 
+    } 
+ 
+    .purpose-grid { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 25px; 
+    } 
+ 
+    .purpose-box { 
+      background: #f8fafc; 
+      border: 1px solid #e2e8f0; 
+      padding: 20px; 
+      border-radius: 12px; 
+    } 
+ 
+    .purpose-box h4 { 
+      font-family: 'Poppins', sans-serif; 
+      color: #0f172a; 
+      font-size: 1.05rem; 
+      margin-bottom: 8px; 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+    } 
+ 
+    .purpose-box p { 
+      font-size: 0.88rem; 
+      color: #64748b; 
+      line-height: 1.5; 
+    } 
+ 
+    /* ========================================== 
+       TOP NAVIGATION BAR 
+       ========================================== */ 
+    #top-nav { 
+      position: sticky; 
+      top: 0; 
+      background-color: #0f172a; 
+      padding: 14px 30px; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+      z-index: 1000; 
+    } 
+ 
+    .nav-buttons { 
+      display: flex; 
+      gap: 12px; 
+    } 
+ 
+    .nav-btn { 
+      background: rgba(255, 255, 255, 0.05); 
+      border: 1px solid #334155; 
+      color: #e2e8f0; 
+      padding: 8px 18px; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 0.88rem; 
+      font-weight: 500; 
+      transition: all 0.2s; 
+    } 
+ 
+    .nav-btn:hover { 
+      background-color: #1e293b; 
+      color: #ffffff; 
+      border-color: #475569; 
+    } 
+ 
+    .nav-btn.active { 
+      background-color: #2563eb; 
+      border-color: #2563eb; 
+      color: #ffffff; 
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3); 
+    } 
+ 
+    .btn-home { 
+      background-color: #334155; 
+      border: none; 
+    } 
+ 
+    .btn-print { 
+      background-color: #10b981; 
+      border: none; 
+      color: white; 
+      font-weight: 600; 
+    } 
+ 
+    .btn-print:hover { 
+      background-color: #059669; 
+    } 
+ 
+    /* ========================================== 
+       DOCUMENT VIEW CONTAINERS 
+       ========================================== */ 
+    .document-wrapper { 
+      max-width: 880px; 
+      margin: 40px auto; 
+      background: #ffffff; 
+      padding: 50px 55px; 
+      border-radius: 12px; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); 
+      border: 1px solid #e2e8f0; 
+    } 
+ 
+    .section-title { 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 1.15rem; 
+      font-weight: 600; 
+      color: #0f172a; 
+      text-transform: uppercase; 
+      letter-spacing: 0.8px; 
+      border-bottom: 2px solid #2563eb; 
+      padding-bottom: 6px; 
+      margin-top: 28px; 
+      margin-bottom: 16px; 
+    } 
+ 
+    /* ========================================== 
+       RESUME SPECIFIC STYLES 
+       ========================================== */ 
+    .resume-header { 
+      text-align: center; 
+      border-bottom: 1px solid #e2e8f0; 
+      padding-bottom: 20px; 
+      margin-bottom: 20px; 
+    } 
+ 
+    .resume-header h1 { 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 2.3rem; 
+      font-weight: 700; 
+      color: #0f172a; 
+      letter-spacing: -0.5px; 
+    } 
+ 
+    .resume-header .title { 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 1.05rem; 
+      color: #2563eb; 
+      font-weight: 600; 
+      margin-bottom: 12px; 
+    } 
+ 
+    .contact-info { 
+      display: flex; 
+      justify-content: center; 
+      flex-wrap: wrap; 
+      gap: 16px; 
+      font-size: 0.88rem; 
+      color: #475569; 
+    } 
+ 
+    .contact-info a { 
+      color: #2563eb; 
+      text-decoration: none; 
+      font-weight: 500; 
+    } 
+ 
+    .contact-info a:hover { 
+      text-decoration: underline; 
+    } 
+ 
+    .resume-item-card { 
+      background: #f8fafc; 
+      border-left: 4px solid #2563eb; 
+      padding: 16px 20px; 
+      border-radius: 0 8px 8px 0; 
+      margin-bottom: 16px; 
+      border-top: 1px solid #f1f5f9; 
+      border-right: 1px solid #f1f5f9; 
+      border-bottom: 1px solid #f1f5f9; 
+    } 
+ 
+    .item-header { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: baseline; 
+    } 
+ 
+    .item-title { 
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 600; 
+      font-size: 1.05rem; 
+      color: #0f172a; 
+    } 
+ 
+    .item-subtitle { 
+      font-style: italic; 
+      color: #475569; 
+      font-size: 0.92rem; 
+      margin-bottom: 6px; 
+    } 
+ 
+    .item-date { 
+      font-size: 0.85rem; 
+      color: #2563eb; 
+      font-weight: 600; 
+      background: #eff6ff; 
+      padding: 2px 10px; 
+      border-radius: 12px; 
+    } 
+ 
+    .resume-list { 
+      margin-left: 18px; 
+      margin-top: 6px; 
+      font-size: 0.92rem; 
+      color: #334155; 
+    } 
+ 
+    .resume-list li { 
+      margin-bottom: 5px; 
+    } 
+ 
+    .skills-box-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+      gap: 12px; 
+    } 
+ 
+    .skill-card { 
+      background: #f8fafc; 
+      border: 1px solid #e2e8f0; 
+      padding: 14px 18px; 
+      border-radius: 8px; 
+      font-size: 0.92rem; 
+    } 
+ 
+    .skill-card strong { 
+      font-family: 'Poppins', sans-serif; 
+      color: #0f172a; 
+      display: block; 
+      margin-bottom: 4px; 
+      font-size: 0.95rem; 
+    } 
+ 
+    /* ========================================== 
+       BIO DATA SPECIFIC STYLES 
+       ========================================== */ 
+    .biodata-header { 
+      text-align: center; 
+      margin-bottom: 30px; 
+      border-bottom: 2px solid #0f172a; 
+      padding-bottom: 10px; 
+    } 
+ 
+    .biodata-header h1 { 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 2.2rem; 
+      font-weight: 700; 
+      color: #0f172a; 
+      letter-spacing: 2px; 
+    } 
+ 
+    .biodata-card-grid { 
+      display: grid; 
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 14px; 
+      margin-bottom: 25px; 
+    } 
+ 
+    .biodata-box { 
+      background: #f8fafc; 
+      border: 1px solid #e2e8f0; 
+      border-radius: 8px; 
+      padding: 12px 16px; 
+      display: flex; 
+      flex-direction: column; 
+    } 
+ 
+    .biodata-box.full-width { 
+      grid-column: span 2; 
+    } 
+ 
+    .biodata-label { 
+      font-family: 'Poppins', sans-serif; 
+      font-size: 0.8rem; 
+      font-weight: 600; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+      color: #2563eb; 
+      margin-bottom: 2px; 
+    } 
+ 
+    .biodata-value { 
+      font-size: 0.95rem; 
+      font-weight: 500; 
+      color: #0f172a; 
+    } 
+ 
+    .table-container-box { 
+      border: 1px solid #e2e8f0; 
+      border-radius: 8px; 
+      overflow: hidden; 
+      margin-top: 10px; 
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02); 
+    } 
+ 
+    .data-table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      font-size: 0.9rem; 
+    } 
+ 
+    .data-table th, .data-table td { 
+      padding: 12px 15px; 
+      text-align: left; 
+    } 
+ 
+    .data-table th { 
+      background-color: #0f172a; 
+      color: #ffffff; 
+      font-family: 'Poppins', sans-serif; 
+      font-weight: 500; 
+      font-size: 0.85rem; 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+    } 
+ 
+    .data-table tr:nth-child(even) { 
+      background-color: #f8fafc; 
+    } 
+ 
+    .data-table tr:not(:last-child) td { 
+      border-bottom: 1px solid #e2e8f0; 
+    } 
+ 
+    .declaration-box { 
+      background: #f1f5f9; 
+      border-left: 4px solid #0f172a; 
+      padding: 16px 20px; 
+      border-radius: 0 8px 8px 0; 
+      margin-top: 25px; 
+      font-size: 0.93rem; 
+      color: #334155; 
+    } 
+ 
+    .signature-area { 
+      display: flex; 
+      justify-content: space-between; 
+      margin-top: 45px; 
+      font-size: 0.95rem; 
+      padding-top: 15px; 
+    } 
+ 
+    /* ========================================== 
+       PRINT STYLES 
+       ========================================== */ 
+    @media print { 
+      #top-nav { 
+        display: none !important; 
+      } 
+ 
+      body { 
+        background: #ffffff; 
+      } 
+ 
+      .document-wrapper { 
+        box-shadow: none; 
+        padding: 0; 
+        margin: 0; 
+        max-width: 100%; 
+        border: none; 
+      } 
+ 
+      .resume-item-card, .skill-card, .biodata-box { 
+        background: #ffffff !important; 
+        border: 1px solid #cbd5e1 !important; 
+      } 
+ 
+      .item-date { 
+        background: transparent !important; 
+        color: #000 !important; 
+      } 
+    } 
+ 
+    /* Responsive adjustments */ 
+    @media (max-width: 768px) { 
+      .purpose-grid { 
+        grid-template-columns: 1fr; 
+      } 
+ 
+      .biodata-card-grid { 
+        grid-template-columns: 1fr; 
+      } 
+ 
+      .biodata-box.full-width { 
+        grid-column: span 1; 
+      } 
+ 
+      .skills-box-grid { 
+        grid-template-columns: 1fr; 
+      } 
+ 
+      .document-wrapper { 
+        padding: 25px 20px; 
+      } 
+ 
+      .item-header { 
+        flex-direction: column; 
+        gap: 4px; 
+      } 
+    } 
+  </style> 
+</head> 
+<body> 
+ 
+  <!-- ========================================== 
+       1. LANDING PAGE (HERO & SELECTION VIEW) 
+       ========================================== --> 
+  <div id="landing-page"> 
+     
+    <!-- Profile Info Header --> 
+    <div class="profile-hero"> 
+      <div class="profile-avatar-container"> 
+        <!-- Make sure your image file is named 'mypic.jpg.jpeg' or update the src attribute --> 
+        <img src="mypic.jpg.jpeg" alt="Akanksha Shetty" class="profile-avatar" /> 
+      </div> 
+      <h1>Akanksha Shetty</h1> 
+       
+      <div class="badge-container"> 
+        <span class="badge">       Full-Stack Development</span> 
+        <span class="badge">    Data Structures & ML</span> 
+        <span class="badge">    VCET Student</span> 
+      </div> 
+    </div> 
+ 
+    <!-- View Selector Cards --> 
+    <div class="card-container"> 
+      <!-- Resume Card --> 
+      <div class="selection-card" onclick="showDocument('resume')"> 
+        <div class="card-icon">    </div> 
+        <h2>Resume</h2> 
+        <p>A concise, career-focused document highlighting technical skills, software engineering 
+projects, and academic performance.</p> 
+        <button class="btn-select">View Resume</button> 
+      </div> 
+ 
+      <!-- Bio Data Card --> 
+      <div class="selection-card" onclick="showDocument('biodata')"> 
+        <div class="card-icon">        </div> 
+        <h2>Bio-Data</h2> 
+        <p>A comprehensive document detailing complete personal background, educational history, 
+permanent details, and official declaration.</p> 
+        <button class="btn-select">View Bio Data</button> 
+      </div> 
+    </div> 
+ 
+    <!-- Purpose / Explanation Section --> 
+    <div class="purpose-section"> 
+      <h3>Understanding Profile Formats</h3> 
+      <div class="purpose-grid"> 
+        <div class="purpose-box"> 
+          <h4>     Why Use a Resume?</h4> 
+          <p>Resumes are tailored for corporate recruitment, campus drives, and technical software 
+engineering applications. They focus on relevant skills, project deliverables, problem-solving 
+achievements, and ATS (Applicant Tracking System) compatibility.</p> 
+        </div> 
+        <div class="purpose-box"> 
+          <h4>         Why Use Bio Data?</h4> 
+          <p>Bio Data (Biographical Data) provides an extensive personal profile including date of birth, 
+family lineage, permanent address, full educational timeline, and formal declarations for academic, 
+institutional, or government verifications.</p> 
+        </div> 
+      </div> 
+    </div> 
+ 
+  </div> 
+ 
+  <!-- ========================================== 
+       2. TOP NAVIGATION BAR (HIDDEN IN LANDING) 
+       ========================================== --> 
+  <div id="top-nav" class="hidden"> 
+    <button class="nav-btn btn-home" onclick="showLanding()">← Back to Portal Options</button> 
+     
+    <div class="nav-buttons"> 
+      <button id="nav-resume-btn" class="nav-btn" onclick="showDocument('resume')">Resume 
+View</button> 
+      <button id="nav-biodata-btn" class="nav-btn" onclick="showDocument('biodata')">Bio Data 
+View</button> 
+    </div> 
+ 
+    <button class="nav-btn btn-print" onclick="window.print()">Print / Save PDF</button> 
+  </div> 
+ 
+  <!-- ========================================== 
+       3. RESUME SECTION 
+       ========================================== --> 
+  <div id="resume-section" class="document-wrapper hidden"> 
+     
+    <!-- RESUME HEADER --> 
+    <div class="resume-header"> 
+      <h1>Akanksha Shetty</h1> 
+      <div class="title">Computer Science & Engineerin</div> 
+ 
+      <div class="contact-info"> 
+        <span>    Puttur, Karnataka, India</span> 
+        <span>        <a 
+href="mailto:akankshasureshshetty@gmail.com">akankshasureshshetty@gmail.com</a></span> 
+        <span>   +91 7349342968</span> 
+        <span>  <a href="https://github.com/2006akanksha" 
+target="_blank">github.com/2006akanksha</a></span> 
+        <span>   <a href="https://linkedin.com/in/AkankshaShetty" 
+target="_blank">linkedin.com/in/AkankshaShetty</a></span> 
+      </div> 
+    </div> 
+ 
+    <!-- SUMMARY --> 
+    <h2 class="section-title">Professional Summary</h2> 
+    <p style="font-size: 0.95rem; color: #334155;">Motivated Computer Science & Engineering 
+student with a strong foundation in data structures, machine learning pipelines, and full-stack 
+software development. Passionate about designing robust web applications and solving complex 
+algorithmic challenges, seeking software engineering and development opportunities to deliver high
+impact technical solutions.</p> 
+ 
+    <!-- EDUCATION --> 
+    <h2 class="section-title">Education</h2> 
+    <div class="resume-item-card"> 
+      <div class="item-header"> 
+        <span class="item-title">Bachelor of Engineering in Computer Science & Engineering</span> 
+        <span class="item-date">2024 – 2028</span> 
+      </div> 
+      <div class="item-subtitle">Vivekananda College of Engineering and Technology (VCET), 
+Puttur</div> 
+      <p style="font-size: 0.9rem; color: #475569; margin-top: 2px;"><strong>CGPA:</strong> 9.07 / 
+10.0</p> 
+    </div> 
+ 
+    <div class="resume-item-card"> 
+      <div class="item-header"> 
+        <span class="item-title">Pre-University Course (PUC / 12th Grade)</span> 
+        <span class="item-date">2022 – 2024</span> 
+      </div> 
+      <div class="item-subtitle">Excel Pre-University College, Guruvayankere</div> 
+      <p style="font-size: 0.9rem; color: #475569; margin-top: 2px;"><strong>Percentage:</strong> 
+92.56%</p> 
+    </div> 
+ 
+    <!-- SKILLS --> 
+    <h2 class="section-title">Technical Skills</h2> 
+    <div class="skills-box-grid"> 
+      <div class="skill-card"> 
+        <strong>Programming Languages</strong> 
+        C, C++, Java, Kotlin, SQL 
+      </div> 
+      <div class="skill-card"> 
+        <strong>Web Technologies</strong> 
+        HTML5, CSS3, JavaScript, React.js 
+      </div> 
+      <div class="skill-card"> 
+        <strong>Tools & Environments</strong> 
+        VS Code, Android Studio, Git, GitHub 
+      </div> 
+      <div class="skill-card"> 
+        <strong>Core Computer Science</strong> 
+        Data Structures & Algorithms, OOPs, DBMS, Operating Systems 
+      </div> 
+    </div> 
+ 
+    <!-- PROJECTS --> 
+    <h2 class="section-title">Featured Projects</h2> 
+    <div class="resume-item-card"> 
+      <div class="item-header"> 
+        <span class="item-title">India Drought Risk Prediction Dashboard</span> 
+        <span class="item-date">2026</span> 
+      </div> 
+      <div class="item-subtitle">Technologies: Python, Machine Learning, React.js</div> 
+      <ul class="resume-list"> 
+        <li>Engineered a machine learning data-cleaning backend to analyze and forecast regional 
+drought risk metrics based on historical climate data.</li> 
+        <li>Built a responsive React.js web dashboard featuring interactive charts and analytics for user
+friendly data visualization.</li> 
+      </ul> 
+    </div> 
+ 
+    <div class="resume-item-card"> 
+      <div class="item-header"> 
+        <span class="item-title">Interactive Resume & Bio Data Portal</span> 
+        <span class="item-date">2026</span> 
+      </div> 
+      <div class="item-subtitle">Technologies: HTML5, CSS3, JavaScript</div> 
+      <ul class="resume-list"> 
+        <li>Developed a multi-view client-side web application allowing users to toggle seamlessly 
+between resume and bio-data profiles.</li> 
+        <li>Implemented custom print stylesheets and responsive CSS Grid layout engines to ensure 
+optimal cross-device presentation.</li> 
+      </ul> 
+    </div> 
+ 
+    <!-- CERTIFICATIONS & ACHIEVEMENTS --> 
+    <h2 class="section-title">Certifications & Achievements</h2> 
+    <div class="resume-item-card" style="border-left-color: #10b981;"> 
+      <ul class="resume-list" style="margin-left: 15px;"> 
+        <li><strong>Infosys Springboard:</strong> Completed Virtual Internship & Technical Certification 
+in Android App Development.</li> 
+        <li><strong>Google Cloud:</strong> Completed Skill Badges & Coursework in Cloud & Full-Stack 
+Application Development.</li> 
+        <li><strong>Competitive Programming:</strong> Solved 200+ data structure and algorithm 
+problems across LeetCode and HackerRank.</li> 
+      </ul> 
+    </div> 
+ 
+  </div> 
+ 
+  <!-- ========================================== 
+       4. BIO DATA SECTION 
+       ========================================== --> 
+  <div id="biodata-section" class="document-wrapper hidden"> 
+     
+    <div class="biodata-header"> 
+      <h1>BIO DATA</h1> 
+    </div> 
+ 
+    <!-- PERSONAL DETAILS IN BOXES --> 
+    <h2 class="section-title">Personal Details</h2> 
+    <div class="biodata-card-grid"> 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Full Name</span> 
+        <span class="biodata-value">Akanksha Shetty</span> 
+      </div> 
+ 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Date of Birth</span> 
+        <span class="biodata-value">15 / 12 / 2006</span> 
+      </div> 
+ 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Father's Name</span> 
+        <span class="biodata-value">Suresh Shetty</span> 
+      </div> 
+ 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Mother's Name</span> 
+        <span class="biodata-value">Vaishali</span> 
+      </div> 
+ 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Gender</span> 
+        <span class="biodata-value">Female</span> 
+      </div> 
+ 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Nationality</span> 
+        <span class="biodata-value">Indian</span> 
+      </div> 
+ 
+      <div class="biodata-box full-width"> 
+        <span class="biodata-label">Languages Known</span> 
+        <span class="biodata-value">English, Kannada, Hindi</span> 
+      </div> 
+ 
+      <div class="biodata-box full-width"> 
+        <span class="biodata-label">Permanent Address</span> 
+        <span class="biodata-value">Huninje House, Mundur Village, Belthangady Taluk, Dakshina 
+Kannada, Karnataka, India</span> 
+      </div> 
+ 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Contact Number</span> 
+        <span class="biodata-value">+91 7349342968</span> 
+      </div> 
+ 
+      <div class="biodata-box"> 
+        <span class="biodata-label">Email Address</span> 
+        <span class="biodata-value">akankshasureshshetty@gmail.com</span> 
+      </div> 
+    </div> 
+ 
+    <!-- ACADEMIC QUALIFICATIONS TABLE BOX --> 
+    <h2 class="section-title">Educational Qualifications</h2> 
+    <div class="table-container-box"> 
+      <table class="data-table"> 
+        <thead> 
+          <tr> 
+            <th>Degree / Qualification</th> 
+            <th>Board / University</th> 
+            <th>Institution</th> 
+            <th>Year</th> 
+            <th>Score</th> 
+          </tr> 
+        </thead> 
+        <tbody> 
+          <tr> 
+            <td>B.E. in Computer Science & Engineering</td> 
+            <td>VTU Belagavi</td> 
+            <td>Vivekananda College of Engineering and Technology, Puttur</td> 
+            <td>2028 (Pursuing)</td> 
+            <td>9.07 CGPA</td> 
+          </tr> 
+          <tr> 
+            <td>12th Grade / PUC</td> 
+            <td>Karnataka State Board</td> 
+            <td>Excel Pre-University College, Guruvayankere</td> 
+            <td>2024</td> 
+            <td>92.56%</td> 
+          </tr> 
+          <tr> 
+            <td>10th Grade / SSLC</td> 
+            <td>Karnataka State Board</td> 
+            <td>SDM English Medium School, Belthangady</td> 
+            <td>2022</td> 
+            <td>93.77%</td> 
+          </tr> 
+        </tbody> 
+      </table> 
+    </div> 
+ 
+    <!-- HOBBIES & INTERESTS --> 
+    <h2 class="section-title">Hobbies & Personal Interests</h2> 
+    <div class="biodata-box full-width"> 
+      <ul class="resume-list" style="margin-left: 15px;"> 
+        <li>Software & Web Application Development</li> 
+        <li>Solving Algorithmic Challenges on Competitive Platforms</li> 
+        <li>Reading Technical Publications & Tech Blogs</li> 
+        <li>Sports & Outdoor Activities</li> 
+      </ul> 
+    </div> 
+ 
+    
+ 
+    
+ 
+  </div> 
+ 
+  <!-- ========================================== 
+       5. JAVASCRIPT LOGIC 
+       ========================================== --> 
+  <script> 
+    function showDocument(docType) { 
+      // Hide Landing Page 
+      document.getElementById('landing-page').classList.add('hidden'); 
+ 
+      // Show Navigation Bar 
+      document.getElementById('top-nav').classList.remove('hidden'); 
+ 
+      // Get Document Sections & Buttons 
+      const resumeSec = document.getElementById('resume-section'); 
+      const biodataSec = document.getElementById('biodata-section'); 
+      const resumeBtn = document.getElementById('nav-resume-btn'); 
+      const biodataBtn = document.getElementById('nav-biodata-btn'); 
+ 
+      if (docType === 'resume') { 
+        resumeSec.classList.remove('hidden'); 
+        biodataSec.classList.add('hidden'); 
+         
+        resumeBtn.classList.add('active'); 
+        biodataBtn.classList.remove('active'); 
+        document.title = "Akanksha Shetty - Resume"; 
+      } else if (docType === 'biodata') { 
+        biodataSec.classList.remove('hidden'); 
+        resumeSec.classList.add('hidden'); 
+ 
+        biodataBtn.classList.add('active'); 
+        resumeBtn.classList.remove('active'); 
+        document.title = "Akanksha Shetty - Bio Data"; 
+      } 
+ 
+      // Scroll smoothly to top 
+      window.scrollTo({ top: 0, behavior: 'smooth' }); 
+    } 
+ 
+    function showLanding() { 
+      // Hide Documents and Navigation 
+      document.getElementById('resume-section').classList.add('hidden'); 
+      document.getElementById('biodata-section').classList.add('hidden'); 
+      document.getElementById('top-nav').classList.add('hidden'); 
+ 
+      // Show Landing Page 
+      document.getElementById('landing-page').classList.remove('hidden'); 
+      document.title = "Akanksha Shetty - Profile Portal"; 
+    } 
+  </script> 
+ 
+</body> 
+</html> 
+ 
